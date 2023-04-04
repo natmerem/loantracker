@@ -1,0 +1,33 @@
+{
+  "name": "loan-prog",
+  "version": "1.0.0",
+  "engines": {
+    "node": "19.4.0",
+    "npm": "9.2.0"
+  },
+  "description": "",
+  "scripts": {
+    "build": "if-env TYPE=server && (cd server && npm install) || (cd client && npm install)",
+    "server": "node ./server/server.js",
+    "client": "cd client && npm start"
+  },
+  "dependencies": {
+    "if-env": "^1.0.4",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "dotenv": "^16.0.3",
+    "react": "^18.2.0",
+    "react-cookie": "^4.1.1",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4",
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "nodemon": "^2.0.20",
+    "pg": "^8.9.0",
+    "uuid": "^9.0.0"
+  }
+}
