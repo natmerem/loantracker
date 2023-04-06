@@ -45,7 +45,7 @@ const App = () => {
           />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <p>
-              This web app is a personal project, it is NOT associated with the
+              This web app is a personal project, it is not associated with the
               SBA.
             </p>
             <p className="user-greeting">hello, {userEmail}!</p>
