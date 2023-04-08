@@ -42,6 +42,8 @@ const App = () => {
   const sortedLoans = loans?.sort((a, b) => a.progress - b.progress);
   // everything here, App, injected into root div of index.html
   // loan info sent as props to components, components html designate how that info should be formatted/rendered
+  // if the authtoken cookie is set, user is signed in, will see App.js
+  // if not set, user will see Auth component, sign in / sign up page
   return (
     <div className="app">
       {!authToken && <Auth />}
