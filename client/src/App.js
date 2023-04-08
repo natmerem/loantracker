@@ -1,19 +1,24 @@
+//useState - save variables to app, vars that will change depending on user interactions
+//useEffect - run some code after rendering, synchronize component to external system
 import { useEffect, useState } from "react";
+// store jwt, email as browser cookies to facilitate user-specific app usage
 import { useCookies } from "react-cookie";
+// piece together the app by piecing together the components
+// some components are composed of other components not imported here
 import Auth from "./components/Auth";
 import ListHeader from "./components/ListHeader";
 import ListItem from "./components/ListItem";
 import LoanInfo from "./components/LoanInfo";
 
 const App = () => {
+  // store jwt, email as browser cookies to facilitate user-specific app usage
   const [cookies, setCookie, removeCookie] = useCookies(null);
-  //const userEmail = "xyz@testing.com";
-  //const authToken = false; //logged in? + jwt stuff
   const userEmail = cookies.Email;
   const authToken = cookies.AuthToken;
 
+  // get/read loans for a user by using request url defined in server.js
+  // save using useState
   const [loans, setLoans] = useState(null);
-
   const getData = async () => {
     try {
       const response = await fetch(
@@ -25,7 +30,8 @@ const App = () => {
       console.error(err);
     }
   };
-
+  
+  // no loans unless user is signed in
   useEffect(() => {
     if (authToken) {
       getData();
@@ -34,6 +40,8 @@ const App = () => {
 
   console.log(loans);
   const sortedLoans = loans?.sort((a, b) => a.progress - b.progress);
+  // everything here, App, injected into root div of index.html
+  // loan info sent as props to components, components html designate how that info should be formatted/rendered
   return (
     <div className="app">
       {!authToken && <Auth />}
