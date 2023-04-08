@@ -2,11 +2,17 @@ import React from "react";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 
+// the modal is a popup form that allows user to create/post new loans or update/edit/put existing loans
+// when the submit button at the bottom of the modal window is clicked, changes are made to the loans table of the db
+// if the modal is accessed from the edit button included with each loan in the list of loans, the modal will be in edit mode
+// if the modal is accessed from the add button included in the header/top of the app, the modal will be in create mode
+// see ListItem.js and ListHeader.js for imports and edit/create mode prop. see App.js for loan prop
+
 const Modal = ({ mode, setShowModal, getData, loan }) => {
-  //const mode = "create";
   const editMode = mode === "edit" ? true : false;
   const [cookies, setCookie, removeCookie] = useCookies(null);
-
+  
+  // if the user is in edit mode, the form inputs should be pre-filled with current values for each loan property
   const [data, setData] = useState({
     //user_email: editMode ? loan.user_email : "xyz@testing.com",
     user_email: editMode ? loan.user_email : cookies.Email,
@@ -15,7 +21,8 @@ const Modal = ({ mode, setShowModal, getData, loan }) => {
     progress: editMode ? loan.progress : 1,
     notes: editMode ? loan.notes : "",
   });
-
+  
+  // send user inputs, saved as data, to the db thru post request url, see server.js
   const postData = async (e) => {
     e.preventDefault();
     try {
@@ -36,7 +43,8 @@ const Modal = ({ mode, setShowModal, getData, loan }) => {
       console.error(err);
     }
   };
-
+  
+  // send user inputs, saved as data, to the db thru put request url, see server.js
   const editData = async (e) => {
     e.preventDefault();
     try {
@@ -57,7 +65,10 @@ const Modal = ({ mode, setShowModal, getData, loan }) => {
       console.error(err);
     }
   };
-
+  
+  // when a user makes a change on any of the inputs, they should immediately see that change
+  // changes won't register to db until user clicks submit, but still
+  // a selected/chnaged value should look like it's been selected/changed
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -68,6 +79,7 @@ const Modal = ({ mode, setShowModal, getData, loan }) => {
 
     //console.log(data);
   };
+  // the form the user will see, each input has associated field in loans table of db
   return (
     <div className="overlay">
       <div className="modal">
