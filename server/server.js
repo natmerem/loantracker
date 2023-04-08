@@ -130,7 +130,7 @@ app.post("/signin", async (req, res) => {
   }
 });
 
-// render speicifically expects server to run on port 10000
+// render.com specifically expects server to run on port 10000
 const port = process.env.PORT || 10000;
 app.listen(port, () => {
   console.log(`server running on port ${port}`);
