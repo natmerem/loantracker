@@ -1,15 +1,22 @@
 //require("dotenv").config();
+// local path to .env, irrelevant for render.com
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
-const express = require("express");
+// prevent cors errors, request origin mismatch
 const cors = require("cors");
+// unique id for primary keys
 const { v4: uuidv4 } = require("uuid");
+// create db connection in db.js, import and do queries here
 const db = require("./db");
+// password hashing with bcrypt
 const bcrypt = require("bcrypt");
+// jsonwebtoken to authorize logged in user access
 const jwt = require("jsonwebtoken");
+// add express methods and features to app
+const express = require("express");
 const app = express();
 
-// middleware
+// middleware, prevent request origin mismatch errors and render json data properly
 app.use(cors());
 app.use(express.json());
 
@@ -123,7 +130,8 @@ app.post("/signin", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 8000;
+// render speicifically expects server to run on port 10000
+const port = process.env.PORT || 10000;
 app.listen(port, () => {
   console.log(`server running on port ${port}`);
 });
