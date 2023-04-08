@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 
 const Auth = () => {
+  // signing in will set email and auth token browser cookies
+  // these cookies are used in App.js to determine whether user sees the app or the sign in page
   const [cookies, setCookie, removeCookie] = useCookies(null);
+  // save form inputs with useState
   const [loggingIn, setLoggingIn] = useState(true);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -10,13 +13,15 @@ const Auth = () => {
   const [error, setError] = useState(null);
 
   //console.log(email, password, confPassword);
-  console.log(cookies);
-
+  //console.log(cookies);
+  
+  // true false, is the user signing in or signing up
   const viewLogIn = (status) => {
     setError(null);
     setLoggingIn(status);
   };
-
+  
+  // sign up vs sign in request urls, which one is used will depend on which form user is submitting
   const handleSubmit = async (e, endpoint) => {
     e.preventDefault();
     if (!loggingIn && password !== confPassword) {
@@ -34,7 +39,8 @@ const Auth = () => {
 
     const data = await response.json();
     //console.log(data);
-
+    // if credentials match, authtoken and email cookies, set
+    // reload page to take user to the actual app
     if (data.detail) {
       setError(data.detail);
     } else {
@@ -43,7 +49,9 @@ const Auth = () => {
       window.location.reload();
     }
   };
-
+  
+  // the form is pretty similar between sign up and sign in
+  // a confirm password field will be displayed if the user is signing up
   return (
     <div className="auth-container">
       <div className="auth-container-box">
