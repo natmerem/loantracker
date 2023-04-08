@@ -1,4 +1,6 @@
 import React from "react";
+// simple svg bank icon, purely aesthetic element
+// icon included for each loan in the list of loans, see ListItem.js for import
 
 const LoanIcon = () => {
   return (
