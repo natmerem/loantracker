@@ -1,5 +1,7 @@
 import React from "react";
-
+// loan type, something the user indicates when they create/edit loans, stored in loans table of db
+// the loan type (ltype) is passed as a prop from App.js to this component, thru the ListItem component
+// the loan type is included for each loan in the list of loans, see ListItem.js for import
 const LoanType = ({ ltype }) => {
   const linfo = [];
   if (ltype === 1) {
