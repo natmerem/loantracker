@@ -1,5 +1,6 @@
 import React from "react";
-
+// brief description and links to more information for each sba loan type
+// this information section is included below the list of loans in App.js
 const LoanInfo = () => {
   return (
     <div>
